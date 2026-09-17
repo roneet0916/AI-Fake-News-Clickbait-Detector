@@ -1,41 +1,24 @@
-import { useState } from "react";
-import api from "../lib/api";
+"use client";
+
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { redirect } from "next/navigation";
-import { useSearchParams } from "next/navigation";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 export default function ResultDashboardPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const [result, setResult] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  // Redirect to analyze if no ID
-  if (!searchParams?.get("id")) {
-    redirect("/analyze");
-  }
+  useEffect(() => {
+    router.replace("/analyze");
+  }, [router]);
 
-  // For now, redirect to analyze since we need result data
-  // In a real implementation we'd fetch by ID
-  router.replace("/analyze");
-  return null;
-}
-
-// Keep a fallback for direct result display from analysis
-export function ResultDisplay({ result }: { result: any }) {
   return (
-    <div className="space-y-6">
-      <div className="bg-gradient-to-r from-indigo-600 to-purple-700 text-white rounded-xl p-6">
-        <h2 className="text-xl font-bold mb-2">Analysis Complete</h2>
-        <p className="text-indigo-100 text-sm">
-          {result.title || "Untitled article"} — analyzed at {result.created_at || "just now"}
-        </p>
-      </div>
-      {/* Result cards will be rendered here */}
-      <pre className="bg-gray-100 p-4 rounded-lg text-sm overflow-x-auto">{JSON.stringify(result, null, 2)}</pre>
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <Navbar />
+      <main className="flex-1 flex items-center justify-center p-8">
+        <p className="text-gray-500">Redirecting to Analysis interface...</p>
+      </main>
+      <Footer />
     </div>
   );
 }
