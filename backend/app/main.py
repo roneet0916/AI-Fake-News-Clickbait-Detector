@@ -25,6 +25,8 @@ def _load_models():
     try:
         import joblib
         model_path = MODELS_DIR / "fake_news_model.joblib"
+        if not model_path.exists():
+            model_path = MODELS_DIR / "fake_news_lr.joblib"
         vectorizer_path = MODELS_DIR / "tfidf_vectorizer.joblib"
 
         if model_path.exists() and vectorizer_path.exists():
@@ -36,7 +38,7 @@ def _load_models():
 
             from app.services.analysis_service import set_fake_news_model
             set_fake_news_model(model, vectorizer, model_name)
-            logger.info(f"Loaded fake news model: {model_name}")
+            logger.info(f"Loaded fake news model: {model_name} from {model_path.name}")
         else:
             logger.warning(
                 "No fake news model found. Train with: python -m app.ml.train_fake_news"
