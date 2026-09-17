@@ -1,0 +1,40 @@
+graph TD
+    User((User)) --> Frontend[Next.js Frontend]
+    Frontend --> API[FastAPI Backend]
+    API --> Analysis[Analysis Service]
+    Analysis --> Preprocessing[NLP Preprocessing]
+    Analysis --> Tfidf[TF-IDF Vectorizer]
+    Analysis --> FakeNews[Fake News Model]
+    Analysis --> Clickbait[Clickbait Analyzer]
+    Analysis --> Sentiment[Sentiment Analyzer]
+    Analysis --> Category[Category Classifier]
+    Analysis --> Explanation[Explanation Engine]
+    Analysis --> History[SQLite History DB]
+    FakeNews --> ModelArtifacts[Joblib Models]
+    Clickbait --> ModelArtifacts
+    Sentiment --> ModelArtifacts
+    Category --> ModelArtifacts
+    Tfidf --> ModelArtifacts
+    History --> HistoryDB[(SQLite)]
+
+    subgraph Frontend Tier
+        Frontend
+        User
+    end
+    subgraph Backend Tier
+        API
+        Analysis
+    end
+    subgraph ML Tier
+        Preprocessing
+        Tfidf
+        FakeNews
+        Clickbait
+        Sentiment
+        Category
+        Explanation
+    end
+    subgraph Storage Tier
+        HistoryDB
+        ModelArtifacts
+    end

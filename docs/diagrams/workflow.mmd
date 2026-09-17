@@ -1,0 +1,18 @@
+graph TD
+    A[Dataset] --> B[Data Cleaning]
+    B --> C{Train/Test Split<br/>Stratified 80/20}
+    C --> D[Train Set]
+    C --> E[Test Set]
+    D --> F[Preprocessing]
+    D --> G[TF-IDF Fit on Training]
+    F --> G
+    G --> H[Train Logistic Regression]
+    G --> I[Train Multinomial NB]
+    H --> J[Evaluate on Test Set]
+    I --> J
+    J --> K{Select Best Model}
+    K --> L[Save Best Model]
+    K --> M[Save Vectorizer]
+    K --> N[Save Evaluation Metrics]
+    L --> O[Application Uses Loaded Model]
+    M --> O

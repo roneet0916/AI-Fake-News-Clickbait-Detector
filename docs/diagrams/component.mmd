@@ -1,0 +1,55 @@
+classDiagram
+    class User {
+        +name: str
+        +input headline: str
+        +input article: str
+    }
+    class NextJSApp {
+        +pages: Route[]
+        +components: Component[]
+        +hooks: Hook[]
+    }
+    class FastAPIBackend {
+        +app: FastAPI
+        +cors_middleware: CORSMiddleware
+    }
+    class AnalysisService {
+        +analyze(text: str): AnalysisResult
+        +preprocess(text: str): str
+    }
+    class FakeNewsClassifier {
+        +model: LogisticRegression
+        +vectorizer: TfidfVectorizer
+        +predict(text: str): dict
+    }
+    class ClickbaitAnalyzer {
+        +analyze(headline: str): dict
+        +extract_features(text: str): dict
+    }
+    class SentimentAnalyzer {
+        +analyze(text: str): dict
+    }
+    class CategoryClassifier {
+        +model: classifier
+        +vectorizer: TfidfVectorizer
+        +classify(text: str): dict
+    }
+    class ExplanationEngine {
+        +generate(result: dict): dict
+    }
+    class Database {
+        +save_analysis(result: dict): int
+        +get_history(): list
+        +get_by_id(id: int): dict
+        +delete_by_id(id: int): bool
+    }
+
+    User --> NextJSApp
+    NextJSApp --> FastAPIBackend
+    FastAPIBackend --> AnalysisService
+    AnalysisService --> FakeNewsClassifier
+    AnalysisService --> ClickbaitAnalyzer
+    AnalysisService --> SentimentAnalyzer
+    AnalysisService --> CategoryClassifier
+    AnalysisService --> ExplanationEngine
+    AnalysisService --> Database

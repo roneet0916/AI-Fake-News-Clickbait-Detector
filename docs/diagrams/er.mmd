@@ -1,0 +1,17 @@
+erDiagram
+    ANALYSIS_HISTORY {
+        int id PK
+        datetime created_at
+        string title
+        text article_preview
+        float fake_probability
+        string predicted_label
+        float clickbait_probability
+        string clickbait_label
+        string sentiment
+        string category
+        text analysis_summary
+    }
+    ANALYSIS_HISTORY {
+        datetime created_at ↔ ANALYSIS_HISTORY
+    }

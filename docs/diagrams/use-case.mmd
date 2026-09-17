@@ -1,0 +1,19 @@
+graph TD
+    U[User] -->|Analyzes news| A[Analyze News]
+    U -->|Views history| B[History]
+    U -->|Reads methodology| C[About/Methodology]
+    U -->|Dashboard| D[Dashboard]
+    A -->|Input Validation| E[Preprocessing]
+    E --> F[Fake News Classifier]
+    E --> G[Clickbait Analyzer]
+    E --> H[Sentiment Analyzer]
+    E --> I[Category Classifier]
+    F --> J[Explanation Engine]
+    G --> J
+    H --> J
+    I --> J
+    J --> K[Result Dashboard]
+    A --> L[Save to SQLite]
+    L --> B
+    B -->|View detail| M[History Detail]
+    D -->|System stats| N[Model Info]

@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# Node
+node_modules/
+.next/
+out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Model artifacts (large binary files)
+*.joblib
+*.pkl
+backend/models/*.json
+
+# Database
+*.db
+
+# Data files (large datasets)
+backend/data/*.csv
+backend/data/*.tsv
+backend/data/*.zip
+data/processed/
+data/splits/
+models/failed/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Keep example env
+!.env.example

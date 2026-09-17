@@ -1,0 +1,34 @@
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant AnalysisService
+    participant FakeNewsModel
+    participant ClickbaitAnalyzer
+    participant SentimentAnalyzer
+    participant CategoryModel
+    participant ExplanationEngine
+    participant SQLite
+
+    User->>Frontend: Enter headline + article
+    Frontend->>Frontend: Validate input
+    User->>Frontend: Click Analyze
+    Frontend->>Backend: POST /api/analyze {title, text}
+    Backend->>Backend: Validate (Pydantic)
+    Backend->>AnalysisService: analyze(title, text)
+    AnalysisService->>AnalysisService: preprocess(text)
+    AnalysisService->>FakeNewsModel: predict(text)
+    FakeNewsModel-->>AnalysisService: label, probability
+    AnalysisService->>ClickbaitAnalyzer: analyze(text)
+    ClickbaitAnalyzer-->>AnalysisService: label, score, features
+    AnalysisService->>SentimentAnalyzer: analyze(text)
+    SentimentAnalyzer-->>AnalysisService: sentiment, score
+    AnalysisService->>CategoryModel: classify(text)
+    CategoryModel-->>AnalysisService: category, confidence
+    AnalysisService->>ExplanationEngine: generate(analyses)
+    ExplanationEngine-->>AnalysisService: explanation text, indicators
+    AnalysisService->>SQLite: Save result
+    SQLite-->>AnalysisService: Confirmation
+    AnalysisService-->>Backend: AnalysisResult
+    Backend-->>Frontend: JSON response
+    Frontend->>User: Display results dashboard
