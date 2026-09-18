@@ -1,6 +1,4 @@
 /** Next.js configuration */
-const nextConfig = {
-  output: "standalone",
-};
+const nextConfig = {};
 
 module.exports = nextConfig;
